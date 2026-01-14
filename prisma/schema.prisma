@@ -1,0 +1,42 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Booking {
+  id        String     @id @default(cuid())
+  service   String
+  date      String
+  time      String
+  name      String
+  email     String
+  phone     String
+  language  String     @default("en")
+  status    String     @default("confirmed") // confirmed, completed, cancelled
+  price     Float      @default(50.0)
+  notes     String?    // Optional customer notes
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  @@index([date])
+  @@index([status])
+}
+
+model ReservedSlot {
+  id        String   @id @default(cuid())
+  date      String
+  time      String
+  expiresAt DateTime // 10 minutes from creation
+  createdAt DateTime @default(now())
+
+  @@unique([date, time])
+  @@index([expiresAt])
+}
+
