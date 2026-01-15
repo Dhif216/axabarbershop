@@ -8,6 +8,13 @@ import { Check, ChevronLeft, ChevronRight, RefreshCw } from "lucide-react";
 import { useI18n } from "./I18nProvider";
 import { SecretAdminButton } from "./SecretAdminButton";
 
+// Helper function to format date in local timezone (not UTC)
+const formatLocalDate = (date: Date): string => {
+  const offset = date.getTimezoneOffset() * 60000;
+  const localDate = new Date(date.getTime() - offset);
+  return localDate.toISOString().split('T')[0];
+};
+
 interface BookingData {
   service: string;
   date: Date | undefined;
@@ -93,7 +100,7 @@ export function BookingPage() {
     if (!bookingData.date) return;
     
     const refreshAvailability = async () => {
-      const dateStr = bookingData.date?.toISOString().split('T')[0];
+      const dateStr = bookingData.date ? formatLocalDate(bookingData.date) : undefined;
       try {
         const response = await fetch(`/api/bookings/availability?date=${dateStr}`);
         if (response.ok) {
@@ -118,7 +125,7 @@ export function BookingPage() {
     
     if (date) {
       // Check availability for selected date
-      const dateStr = date.toISOString().split('T')[0];
+      const dateStr = formatLocalDate(date);
       try {
         const response = await fetch(`/api/bookings/availability?date=${dateStr}`);
         if (response.ok) {
@@ -143,7 +150,7 @@ export function BookingPage() {
     
     try {
       // First, reserve the slot (lock it for 10 minutes)
-      const dateStr = bookingData.date?.toISOString().split('T')[0];
+      const dateStr = bookingData.date ? formatLocalDate(bookingData.date) : undefined;
       const reserveResponse = await fetch('/api/bookings/reserve-slot', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -363,7 +370,7 @@ export function BookingPage() {
                     {bookingData.date && (
                       <button
                         onClick={async () => {
-                          const dateStr = bookingData.date?.toISOString().split('T')[0];
+                          const dateStr = bookingData.date ? formatLocalDate(bookingData.date) : undefined;
                           const response = await fetch(`/api/bookings/availability?date=${dateStr}`);
                           if (response.ok) {
                             const data = await response.json();

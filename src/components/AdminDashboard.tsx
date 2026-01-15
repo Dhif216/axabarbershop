@@ -161,6 +161,7 @@ export function AdminDashboard() {
     if (!user) return; // Don't trigger if not logged in
     
     if (bookings.length > previousBookingCount) {
+      console.log(`New bookings detected! Previous: ${previousBookingCount}, Current: ${bookings.length}`);
       // Get the newest booking
       const newestBooking = bookings[0];
       
