@@ -6,6 +6,7 @@ import { AuthProvider } from "../src/context/AuthContext";
 import { CookieConsent } from "../src/components/CookieConsent";
 import { KidsWelcome } from "../src/components/KidsWelcome";
 import Footer from "../src/components/Footer";
+import { Toaster } from 'sonner';
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://axabarbershop.fi"),
@@ -125,6 +126,7 @@ export default function RootLayout({
             <Footer />
           </I18nProvider>
         </AuthProvider>
+        <Toaster position="top-right" />
       </body>
     </html>
   );

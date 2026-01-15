@@ -1,18 +1,18 @@
 {
-  "/_not-found/page": "/_not-found",
   "/api/admin/bookings/route": "/api/admin/bookings",
   "/api/admin/init/route": "/api/admin/init",
   "/api/admin/users/[id]/route": "/api/admin/users/[id]",
   "/api/admin/users/route": "/api/admin/users",
-  "/api/bookings/availability/route": "/api/bookings/availability",
   "/api/booking/route": "/api/booking",
+  "/api/bookings/availability/route": "/api/bookings/availability",
   "/api/bookings/reserve-slot/route": "/api/bookings/reserve-slot",
   "/api/contact/route": "/api/contact",
+  "/_not-found/page": "/_not-found",
   "/about/page": "/about",
   "/admin/login/page": "/admin/login",
-  "/admin/page": "/admin",
   "/admin/users/page": "/admin/users",
+  "/admin/page": "/admin",
   "/booking/page": "/booking",
-  "/services/page": "/services",
-  "/page": "/"
+  "/page": "/",
+  "/services/page": "/services"
 }
