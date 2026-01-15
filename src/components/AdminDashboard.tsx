@@ -37,11 +37,16 @@ interface Booking {
   createdAt: string;
 }
 
-export function AdminDashboard() {
+interface AdminDashboardProps {
+  initialToken?: string | null;
+  onLogout?: () => void;
+}
+
+export function AdminDashboard({ initialToken, onLogout }: AdminDashboardProps = {}) {
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [password, setPassword] = useState('');
-  const [adminToken, setAdminToken] = useState<string | null>(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [adminToken, setAdminToken] = useState<string | null>(initialToken || null);
+  const [isLoggedIn, setIsLoggedIn] = useState(!!initialToken);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [filterStatus, setFilterStatus] = useState('all');
@@ -324,6 +329,9 @@ export function AdminDashboard() {
     setIsLoggedIn(false);
     setAdminToken(null);
     setBookings([]);
+    if (onLogout) {
+      onLogout();
+    }
   };
 
   const handleManualRefresh = async () => {

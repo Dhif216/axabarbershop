@@ -6,6 +6,7 @@ import { Label } from "./ui/label";
 import { Calendar } from "./ui/calendar";
 import { Check, ChevronLeft, ChevronRight, RefreshCw } from "lucide-react";
 import { useI18n } from "./I18nProvider";
+import { SecretAdminButton } from "./SecretAdminButton";
 
 interface BookingData {
   service: string;
@@ -556,6 +557,7 @@ export function BookingPage() {
         )}
       </div>
       </div>
+      <SecretAdminButton />
     </div>
   );
 }

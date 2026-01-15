@@ -1,6 +1,6 @@
 'use client';
 
-import { Menu, X, Lock } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import { Button } from './ui/button';
 import { useI18n } from './I18nProvider';
@@ -77,15 +77,6 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
                 EN
               </button>
             </div>
-
-            {/* Admin Icon */}
-            <a 
-              href="/admin" 
-              className="ml-2 p-2 rounded hover:bg-foreground/10 transition-colors text-foreground/70 hover:text-foreground"
-              title="Admin"
-            >
-              <Lock className="h-5 w-5" />
-            </a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -160,15 +151,6 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
                   English
                 </button>
               </div>
-
-              {/* Mobile Admin Link */}
-              <a 
-                href="/admin" 
-                className="flex items-center gap-2 py-2 px-3 rounded mt-4 pt-4 border-t border-border text-foreground/70 hover:text-foreground hover:bg-foreground/10 transition-colors"
-              >
-                <Lock className="h-5 w-5" />
-                <span>Admin</span>
-              </a>
             </div>
           </div>
         )}
