@@ -148,11 +148,9 @@ export function AdminDashboard() {
     
     audioRef.current = { play: createRingingBellSound };
 
-    // Cleanup
+    // Cleanup - don't close audio context, keep it alive
     return () => {
-      if (audioContext && audioContext.state !== 'closed') {
-        audioContext.close();
-      }
+      // Keep audio context alive for repeated notifications
     };
   }, []);
 
@@ -167,7 +165,13 @@ export function AdminDashboard() {
       
       // Play bell sound
       try {
-        audioRef.current?.play();
+        console.log('Attempting to play bell sound...');
+        if (audioRef.current && typeof audioRef.current.play === 'function') {
+          audioRef.current.play();
+          console.log('Bell sound played successfully');
+        } else {
+          console.warn('Audio ref not available or not a function');
+        }
       } catch (e) {
         console.error('Bell sound error:', e);
       }
