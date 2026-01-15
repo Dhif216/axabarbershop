@@ -21,7 +21,8 @@
     "allowJs": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./src/*"],
+      "@/lib/*": ["./lib/*"]
     },
     "plugins": [
       {

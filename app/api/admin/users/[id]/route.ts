@@ -34,8 +34,9 @@ async function verifyAdmin(request: NextRequest) {
 // DELETE admin user
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params
   const { valid, error: authError } = await verifyAdmin(request)
 
   if (!valid) {
@@ -43,7 +44,7 @@ export async function DELETE(
   }
 
   try {
-    const userId = params.id
+    const userId = id
 
     if (!userId) {
       return NextResponse.json({ error: 'User ID is required' }, { status: 400 })
